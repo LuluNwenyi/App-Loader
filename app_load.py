@@ -38,7 +38,7 @@ def addApp():
 
 def runApps():
     for app in apps:
-        subprocess.call(["open", app])
+        subprocess.call(["open", app]) #for windows,use os.startfile(app)
        
 
 #background
@@ -51,6 +51,12 @@ runButton = Button(root, text= "Run Apps", command= runApps)
 
 myButton.pack(side=BOTTOM)
 runButton.pack(side=BOTTOM)
+
+#to save on Canvas
+for app in apps:
+    label= Label(myCanvas, text=app)
+    label.pack()
+
 
 root.mainloop()
 
