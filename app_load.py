@@ -1,16 +1,24 @@
 from tkinter import *
 from tkinter.ttk import * 
 import tkinter.filedialog
-import os
+import os, sys, subprocess
 
 root = Tk() 
 root.title("My App Runner")
 root.geometry("350x400")
 
 
-#to add a new app
+#app list
 apps = []
 
+#to make sure the app doesn't enter an empty value to the list
+if os.path.isfile('save.txt'):
+    with open('save.txt', "r") as f:
+        tempApps = f.read()
+        tempApps = tempApps.split(',')
+        apps = [x for x in tempApps if x.strip()] #removes the empty value
+    
+#to add the app
 def addApp():
     
     for widget in myCanvas.winfo_children():
@@ -30,7 +38,8 @@ def addApp():
 
 def runApps():
     for app in apps:
-        os.startfile(app)
+        subprocess.call(["open", app])
+       
 
 #background
 myCanvas= Canvas(root, width=350, height=350, background= "#2242B4")
